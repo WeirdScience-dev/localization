@@ -1,0 +1,33 @@
+{
+  "name": "@weirdscience/localization",
+  "version": "1.0.0",
+  "description": "A TypeScript library for managing localization and translations, supporting multiple languages, dynamic language switching, and translation retrieval.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "tsx src/index.ts",
+    "build": "tsc",
+    "prepublishOnly": "npm run build"
+  },
+  "keywords": [
+    "localization",
+    "translation",
+    "language support",
+    "dynamic language switching",
+    "pluralization",
+    "intl",
+    "i18n"
+  ],
+  "author": "Michaël Romain",
+  "license": "MIT",
+  "devDependencies": {
+    "@biomejs/biome": "1.6.2",
+    "@types/pluralize": "^0.0.33",
+    "tsx": "^4.7.1",
+    "typescript": "^5.4.3"
+  },
+  "dependencies": {
+    "pluralize": "^8.0.0"
+  }
+}
