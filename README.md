@@ -77,7 +77,7 @@ Get a translated string, with optional parameter replacement and pluralization:
 console.log(localization.t("greeting", { name: "John" }));
 
 // Pluralization
-console.log(localization.t("apples", {}, 5));
+console.log(localization.t("apple", {}, 5)); // apples
 ```
 
 ## API Reference
