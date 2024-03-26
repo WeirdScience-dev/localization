@@ -1,4 +1,4 @@
-## 1.0.3
+## 1.1.0
 
 #### New Features
 
@@ -21,4 +21,4 @@
 
 - Enhanced code comments and documentation within the `Localization` class to better describe the functionality, including the new features regarding locale detection and namespaced translation keys.
 
-This changelog summarizes significant updates, including the introduction of new features, enhancements, and dependency changes aimed at improving the localization system's flexibility and capability.
+This changelog was generated with [@weirdscience/version](https://www.npmjs.com/package/@weirdscience/version).
