@@ -1,3 +1,14 @@
+## 1.1.1
+
+#### Version 1.1.1 Updates
+
+- **Package and Distribution:**
+
+  - Added a new section in `package.json` for specifying which files should be included when publishing the package. This includes the `dist` directory, `README.md`, `LICENSE`, and `CHANGELOG.md`.
+
+- **Code Enhancements:**
+  - In `src/localization.ts`, added bindings in the constructor for key methods (`t`, `init`, `addLanguage`, `detectAndSetLocale`, `setLanguage`) to ensure they maintain the correct `this` context when used. This helps avoid common issues related to `this` keyword in JavaScript when the context might inadvertently change, for example, when passing methods as callbacks.
+
 ## 1.1.0
 
 #### New Features
