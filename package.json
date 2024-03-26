@@ -18,6 +18,12 @@
     "build": "tsc",
     "prepublishOnly": "npm run build"
   },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "CHANGELOG.md"
+  ],
   "keywords": [
     "localization",
     "translation",

@@ -21,6 +21,11 @@ class Localization {
 
 	constructor() {
 		this.languages = {};
+		this.t = this.t.bind(this);
+		this.init = this.init.bind(this);
+		this.addLanguage = this.addLanguage.bind(this);
+		this.detectAndSetLocale = this.detectAndSetLocale.bind(this);
+		this.setLanguage = this.setLanguage.bind(this);
 	}
 
 	/**
