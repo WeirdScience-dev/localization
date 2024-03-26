@@ -1,4 +1,5 @@
 import pluralize from "pluralize";
+import { get } from "lodash";
 
 export interface Translations {
 	[key: string]: string;
@@ -23,27 +24,34 @@ class Localization {
 	}
 
 	/**
-	 * Initializes the localization system with default settings.
-	 * This method sets up the default language, fallback language, and loads the provided translations.
+	 * Initializes the localization system with the provided settings or defaults.
+	 * Sets the default and fallback languages, loads initial translations, and optionally detects the user's locale.
 	 *
-	 * @param defaultLang The default language code (e.g., 'en'). Defaults to 'en' if not specified.
-	 * @param languages An object containing language codes as keys and their respective translations as values.
-	 * @param fallbackLang The fallback language code to use when a translation is not available in the current language. Defaults to 'en' if not specified.
+	 * @param defaultLang - The default language code (e.g., 'en'). If not specified, 'en' is used.
+	 * @param languages - An object mapping language codes to their translations.
+	 * @param fallbackLang - The fallback language code used when a translation is missing in the current language. Defaults to 'en' if not provided.
+	 * @param detectLocale - A boolean indicating whether to automatically detect and set the user's locale as the current language. Defaults to false.
 	 */
 	init({
 		defaultLang = "en",
 		languages = {},
 		fallbackLang = "en",
+		detectLocale = false,
 	}: {
 		defaultLang?: string;
 		languages: Languages;
 		fallbackLang?: string;
+		detectLocale?: boolean;
 	}) {
 		this.currentLang = defaultLang;
 		this.fallbackLang = fallbackLang;
 
 		for (const lang of Object.keys(languages)) {
 			this.addLanguage(lang, languages[lang]);
+		}
+
+		if (detectLocale) {
+			this.detectAndSetLocale();
 		}
 	}
 
@@ -98,14 +106,15 @@ class Localization {
 	}
 
 	/**
-	 * Retrieves and formats a translation string.
+	 * Retrieves and formats a translation string with support for namespaced keys.
 	 *
-	 * This method looks up a translation key in the current language's translations.
+	 * This method looks up a translation key in the current language's translations using lodash's get method.
+	 * This allows for accessing nested translation strings using a dot notation (e.g., 'namespace.key').
 	 * If the key is not found, it attempts to find it in the fallback language's translations.
 	 * If a count is provided, it will pluralize the translation accordingly.
 	 * Additionally, it replaces any parameters in the translation string with the provided values.
 	 *
-	 * @param key The translation key to look up.
+	 * @param key The translation key to look up, supporting namespaced keys.
 	 * @param params An optional object containing parameters to replace in the translation string.
 	 * @param count An optional number used for pluralization.
 	 * @returns The formatted translation string.
@@ -113,7 +122,9 @@ class Localization {
 	t(key: string, params: Record<string, string | number> = {}, count?: number) {
 		const translations = this.languages[this.currentLang] || {};
 		let translation =
-			translations[key] || this.languages[this.fallbackLang][key] || key;
+			get(translations, key) ||
+			get(this.languages[this.fallbackLang], key) ||
+			key;
 
 		if (count !== undefined) {
 			translation = this.pluralize(translation, count);
@@ -128,6 +139,17 @@ class Localization {
 		}
 
 		return translation;
+	}
+
+	/**
+	 * Automatically detects the browser's language and sets it as the current language.
+	 * If the browser's language is not supported, it falls back to the default language.
+	 */
+	detectAndSetLocale() {
+		const browserLang = navigator.language.split("-")[0];
+		const isSupported = Object.keys(this.languages).includes(browserLang);
+
+		this.setLanguage(isSupported ? browserLang : this.fallbackLang);
 	}
 }
 

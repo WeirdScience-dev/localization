@@ -23,11 +23,13 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.6.2",
+    "@types/lodash": "^4.17.0",
     "@types/pluralize": "^0.0.33",
     "tsx": "^4.7.1",
     "typescript": "^5.4.3"
   },
   "dependencies": {
+    "lodash": "^4.17.21",
     "pluralize": "^8.0.0"
   }
 }
