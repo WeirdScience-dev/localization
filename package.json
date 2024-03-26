@@ -2,6 +2,14 @@
   "name": "@weirdscience/localization",
   "version": "1.0.2",
   "description": "A TypeScript library for managing localization and translations, supporting multiple languages, dynamic language switching, and translation retrieval.",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WeirdScience-dev/localization.git"
+  },
+  "bugs": {
+    "url": "https://github.com/WeirdScience-dev/localization/issues"
+  },
+  "homepage": "https://github.com/WeirdScience-dev/localization#readme",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
